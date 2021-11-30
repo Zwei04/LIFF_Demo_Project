@@ -30,6 +30,7 @@ const dataFrom = document.getElementById('dataFrom');
 
 const btnShare = document.getElementById('btnShare');
 const btnLogout = document.getElementById('btnLogout');
+const qrScan = document.getElementById('qrScan');
 //1656637974-pj6o1ewZ
 async function main() {
   liff.ready.then(() => {
@@ -40,17 +41,18 @@ async function main() {
     }
     if (liff.isInClient()) {
       getUserProfile();
+      qrScan.style.display = 'block';
     } else {
       getUserProfile2();
     }
     btnShare.style.display = 'block';
     btnLogout.style.display = 'block';
 
-    const queryString = decodeURIComponent(window.location.search);
-    const param = new URISearchParams(queryString);
+    /*const queryString = decodeURIComponent(window.location.search);
+    const params = new URLSearchParams(queryString);
     if (params.get('param') !== null) {
       accessId.innerHTML = '<b>QR Scan : </b>' + params.get('param');
-    }
+    }*/
   });
 
   //await liff.init({ liffId: '1656641765-MYeg7wkn' });
@@ -152,6 +154,11 @@ async function shareMsg() {
     alert('ShareTargetPicker was cancelled by user');
   }
   liff.closeWindow();
+}
+
+async function scanCode() {
+  const result = await liff.scanCode();
+  accessId.innerHTML = '<b>QR Scan : </b>' + result.value;
 }
 
 btnShare.onclick = () => {

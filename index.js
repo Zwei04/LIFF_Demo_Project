@@ -45,6 +45,12 @@ async function main() {
     }
     btnShare.style.display = 'block';
     btnLogout.style.display = 'block';
+
+    const queryString = decodeURIComponent(window.location.search);
+    const param = new URISearchParams(queryString);
+    if (params.get('param') !== null) {
+      accessId.innerHTML = '<b>QR Scan : </b>' + params.get('param');
+    }
   });
 
   //await liff.init({ liffId: '1656641765-MYeg7wkn' });

@@ -41,12 +41,12 @@ async function main() {
     }
     if (liff.isInClient()) {
       getUserProfile();
-      qrScan.style.display = 'block';
     } else {
       getUserProfile2();
     }
     btnShare.style.display = 'block';
     btnLogout.style.display = 'block';
+    qrScan.style.display = 'block';
 
     /*const queryString = decodeURIComponent(window.location.search);
     const params = new URLSearchParams(queryString);
@@ -157,7 +157,7 @@ async function shareMsg() {
 }
 
 async function scanCode() {
-  const result = await liff.scanCode();
+  const result = await liff.scanCodeV2();
   accessId.innerHTML = '<b>QR Scan : </b>' + result.value;
 }
 
@@ -168,4 +168,8 @@ btnShare.onclick = () => {
 btnLogout.onclick = () => {
   alert('User has logged out');
   liff.logout();
+};
+
+qrScan.onclick = () => {
+  scanCode();
 };
